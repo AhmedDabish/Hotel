@@ -11,7 +11,8 @@
         public bool IsAvailable { get; set; } = true;
         public string? Description { get; set; }
         public string? Features { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow; 
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string? ImagePath { get; set; }
 
     }
 }

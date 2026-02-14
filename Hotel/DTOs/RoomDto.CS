@@ -10,6 +10,8 @@ namespace Hotel.DTOs.Room
         public int Capacity { get; set; }
         public bool IsAvailable { get; set; }
         public string? Description { get; set; }
+        public string? ImagePath { get; set; }  
+
         public string? Features { get; set; }
     }
 
@@ -21,6 +23,7 @@ namespace Hotel.DTOs.Room
         public int Capacity { get; set; } = 2;
         public string? Description { get; set; }
         public string? Features { get; set; }
+        public string? ImagePath { get; set; }  
     }
 
     public class UpdateRoomDto
@@ -31,5 +34,7 @@ namespace Hotel.DTOs.Room
         public bool? IsAvailable { get; set; }
         public string? Description { get; set; }
         public string? Features { get; set; }
+        public string? ImagePath { get; set; }  
+
     }
 }

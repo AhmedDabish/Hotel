@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.FileProviders; // ✅ أضف هذه
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,6 +79,37 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// ✅ الأهم: تأكد من وجود مجلد wwwroot
+var webRootPath = app.Environment.WebRootPath;
+if (string.IsNullOrEmpty(webRootPath))
+{
+    webRootPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot");
+    Console.WriteLine($"WebRootPath was null, setting to: {webRootPath}");
+}
+
+// ✅ لو المجلد مش موجود، اعمل واحد جديد
+if (!Directory.Exists(webRootPath))
+{
+    Console.WriteLine($"Creating wwwroot folder at: {webRootPath}");
+    Directory.CreateDirectory(webRootPath);
+}
+
+// ✅ تأكد من وجود مجلد images
+var imagesPath = Path.Combine(webRootPath, "images");
+if (!Directory.Exists(imagesPath))
+{
+    Console.WriteLine($"Creating images folder at: {imagesPath}");
+    Directory.CreateDirectory(imagesPath);
+}
+
+Console.WriteLine($"WebRootPath: {webRootPath}");
+Console.WriteLine($"Images folder: {imagesPath}");
+Console.WriteLine($"wwwroot exists: {Directory.Exists(webRootPath)}");
+Console.WriteLine($"images exists: {Directory.Exists(imagesPath)}");
+
+// ✅ هذا مهم جداً - يجب أن يكون قبل أي Middleware
+app.UseStaticFiles();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -99,16 +131,13 @@ using (var scope = app.Services.CreateScope())
         var context = services.GetRequiredService<ApplicationDbContext>();
         var userRepository = services.GetRequiredService<IUserRepository>();
 
-        // تأكد من إنشاء قاعدة البيانات
         Console.WriteLine("Applying migrations...");
         context.Database.EnsureCreated();
         Console.WriteLine("Migrations applied successfully!");
 
-        // التحقق من اتصال قاعدة البيانات
         var canConnect = await context.Database.CanConnectAsync();
         Console.WriteLine($"Can connect to database: {canConnect}");
 
-        // إضافة المستخدم الافتراضي إذا لم يكن موجوداً
         if (!context.Users.Any())
         {
             Console.WriteLine("Creating default admin user...");
@@ -126,7 +155,6 @@ using (var scope = app.Services.CreateScope())
             Console.WriteLine("Default admin user created successfully!");
         }
 
-        // إضافة إعدادات افتراضية للفندق
         if (!context.HotelSettings.Any())
         {
             Console.WriteLine("Creating default hotel settings...");
@@ -150,7 +178,6 @@ using (var scope = app.Services.CreateScope())
             Console.WriteLine("Default hotel settings created successfully!");
         }
 
-        // إضافة غرف افتراضية
         if (!context.Rooms.Any())
         {
             Console.WriteLine("Creating default rooms...");
@@ -205,5 +232,4 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-Console.WriteLine($"API is running on: {app.Urls}");
 app.Run();
