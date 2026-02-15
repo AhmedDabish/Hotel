@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الفندق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* جميع الـ CSS السابق كما هو - لا تغيير */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #0a3d62;
+            --secondary-color: #f9ca24;
+            --accent-color: #6ab04c;
+            --light-color: #f5f6fa;
+            --dark-color: #2c3e50;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        /* Login Screen */
+        #loginScreen {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-logo i {
+            font-size: 60px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .login-logo h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+        
+        .login-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-title h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .login-title p {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(10, 61, 98, 0.1);
+        }
+        
+        .password-input {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #083454;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Dashboard Screen - Hidden by Default */
+        #dashboardScreen {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .dashboard-container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: var(--primary-color);
+            color: white;
+            overflow-y: auto;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo h2 {
+            font-size: 22px;
+            color: var(--secondary-color);
+        }
+        
+        .logo p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .nav-links {
+            padding: 20px 0;
+        }
+        
+        .nav-links li {
+            list-style: none;
+        }
+        
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: var(--transition);
+            border-right: 3px solid transparent;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-right-color: var(--secondary-color);
+        }
+        
+        .nav-links i {
+            margin-left: 10px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .logout-btn {
+            position: absolute;
+            bottom: 0;
+            width: 250px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f0f5ff;
+        }
+        
+        .header {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+        
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        /* Stats */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+        }
+        
+        .stat-card.bookings::before {
+            background-color: var(--primary-color);
+        }
+        
+        .stat-card.revenue::before {
+            background-color: var(--accent-color);
+        }
+        
+        .stat-card.rooms::before {
+            background-color: #3498db;
+        }
+        
+        .stat-card.occupancy::before {
+            background-color: #9b59b6;
+        }
+        
+        .stat-card i {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-card.bookings i {
+            color: var(--primary-color);
+        }
+        
+        .stat-card.revenue i {
+            color: var(--accent-color);
+        }
+        
+        .stat-card.rooms i {
+            color: #3498db;
+        }
+        
+        .stat-card.occupancy i {
+            color: #9b59b6;
+        }
+        
+        .stat-card h3 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card p {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section-title h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title h2 i {
+            color: var(--secondary-color);
+        }
+        
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status.confirmed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status.cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+        
+        .action-btn.confirm {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .action-btn.cancel {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .action-btn.edit {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .action-btn.delete {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-success {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #5aa03c;
+        }
+        
+        .btn-warning {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-warning:hover {
+            background-color: #e1b10f;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #083454;
+        }
+        
+        /* Forms */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary-color);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .logout-btn {
+                position: relative;
+                width: 100%;
+            }
+            
+            .stats-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            #loginScreen {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen (Initially Visible) -->
+    <div id="loginScreen">
+        <div class="login-logo">
+            <i class="fas fa-hotel"></i>
+            <h1>فندق الرفاهية</h1>
+        </div>
+        
+        <div class="login-title">
+            <h2>تسجيل الدخول للوحة التحكم</h2>
+            <p>أدخل بيانات الدخول للوصول إلى لوحة التحكم</p>
+        </div>
+        
+        <div id="errorAlert" class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i> <span id="errorMessage">اسم المستخدم أو كلمة المرور غير صحيحة</span>
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <div class="password-input">
+                    <input type="password" id="password" class="form-control" placeholder="أدخل كلمة المرور" required>
+                    <button type="button" class="password-toggle" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+            </button>
+        </form>
+    </div>
+    
+    <!-- Dashboard Screen (Hidden Until Login) -->
+    <div id="dashboardScreen">
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="logo">
+                    <h2>فندق الرفاهية</h2>
+                    <p>لوحة التحكم الإدارية</p>
+                </div>
+                
+                <ul class="nav-links">
+                    <li>
+                        <a href="#" class="active" data-section="dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>لوحة التحكم</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="bookings">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>إدارة الحجوزات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="rooms">
+                            <i class="fas fa-bed"></i>
+                            <span>إدارة الغرف</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="hotelInfo">
+                            <i class="fas fa-hotel"></i>
+                            <span>معلومات الفندق</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>الإعدادات</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav-links logout-btn">
+                    <a href="#" id="logoutLink">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>تسجيل الخروج</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Header -->
+                <div class="header">
+                    <h1 id="pageTitle">لوحة التحكم الرئيسية</h1>
+                    <div class="header-info">
+                        <div class="user-info">
+                            <div class="user-avatar" id="userAvatar">م</div>
+                            <div>
+                                <p style="font-weight: bold;" id="userFullName">مالك الفندق</p>
+                                <p style="font-size: 14px; color: #666;">Admin</p>
+                            </div>
+                        </div>
+                        <div id="currentDate" style="color: #666; font-size: 14px;"></div>
+                    </div>
+                </div>
+                
+                <!-- Stats -->
+                <div class="stats-cards">
+                    <div class="stat-card bookings">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3 id="totalBookings">0</h3>
+                        <p>إجمالي الحجوزات</p>
+                    </div>
+                    
+                    <div class="stat-card revenue">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3 id="totalRevenue">$0</h3>
+                        <p>إجمالي الإيرادات</p>
+                    </div>
+                    
+                    <div class="stat-card rooms">
+                        <i class="fas fa-hotel"></i>
+                        <h3 id="availableRooms">0</h3>
+                        <p>الغرف المتاحة</p>
+                    </div>
+                    
+                    <div class="stat-card occupancy">
+                        <i class="fas fa-chart-line"></i>
+                        <h3 id="occupancyRate">0%</h3>
+                        <p>معدل الإشغال</p>
+                    </div>
+                </div>
+                
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="content-section active">
+                    <div class="section-title">
+                        <h2><i class="fas fa-tachometer-alt"></i> نظرة عامة</h2>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>إجمالي الإيرادات لهذا الشهر</label>
+                            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                <h3 style="color: var(--accent-color);" id="monthRevenue">$0</h3>
+                                <p>شهر <span id="currentMonth"></span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>الحجوزات النشطة اليوم</label>
+                            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                                <h3 style="color: var(--primary-color);" id="todayBookings">0</h3>
+                                <p>حجوزات فعالة اليوم</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <h3 style="margin-bottom: 15px; color: var(--primary-color);">آخر الحجوزات</h3>
+                        <div id="recentBookingsContainer">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bookings Management Section -->
+                <div id="bookings" class="content-section">
+                    <div class="section-title">
+                        <h2><i class="fas fa-calendar-check"></i> إدارة الحجوزات</h2>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+                        <button class="btn btn-primary" onclick="openAddBookingModal()"><i class="fas fa-plus"></i> إضافة حجز جديد</button>
+                        <button class="btn btn-success" onclick="exportBookingsToExcel()"><i class="fas fa-file-excel"></i> تصدير إلى Excel</button>
+                        <button class="btn btn-warning" onclick="printBookings()"><i class="fas fa-print"></i> طباعة الحجوزات</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <div id="bookingsTableContainer">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Rooms Management Section -->
+                <div id="rooms" class="content-section">
+                    <div class="section-title">
+                        <h2><i class="fas fa-bed"></i> إدارة الغرف</h2>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+                        <button class="btn btn-primary" onclick="openAddRoomModal()"><i class="fas fa-plus"></i> إضافة غرفة جديدة</button>
+                        <button class="btn btn-success" onclick="refreshRooms()"><i class="fas fa-sync"></i> تحديث القائمة</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <div id="roomsTableContainer">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel Info Section -->
+                <div id="hotelInfo" class="content-section">
+                    <div class="section-title">
+                        <h2><i class="fas fa-hotel"></i> معلومات الفندق</h2>
+                    </div>
+                    
+                    <form id="hotelInfoForm">
+                        <div class="form-group">
+                            <label>اسم الفندق *</label>
+                            <input type="text" id="hotelName" class="form-control" placeholder="أدخل اسم الفندق" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>عنوان الفندق *</label>
+                            <input type="text" id="hotelAddress" class="form-control" placeholder="أدخل العنوان الكامل" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>رقم الهاتف *</label>
+                                <input type="tel" id="hotelPhone" class="form-control" placeholder="مثال: +966 12 345 6789" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>البريد الإلكتروني *</label>
+                                <input type="email" id="hotelEmail" class="form-control" placeholder="مثال: info@hotel.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>وصف الفندق</label>
+                            <textarea id="hotelDescription" class="form-control" placeholder="أدخل وصف الفندق"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> حفظ المعلومات</button>
+                    </form>
+                </div>
+                
+                <!-- Settings Section -->
+                <div id="settings" class="content-section">
+                    <div class="section-title">
+                        <h2><i class="fas fa-cog"></i> الإعدادات</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3 style="color: var(--primary-color); margin-bottom: 15px;">مزامنة البيانات</h3>
+                        <p>جميع التغييرات التي تقوم بها في لوحة التحكم يتم حفظها في قاعدة البيانات وتظهر مباشرة في الموقع الرئيسي.</p>
+                        <button class="btn btn-primary" onclick="refreshAllData()"><i class="fas fa-sync"></i> تحديث جميع البيانات</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="addBookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus"></i> إضافة حجز جديد</h2>
+                <button class="close-modal" onclick="closeModal('addBookingModal')">&times;</button>
+            </div>
+            
+            <form id="newBookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>اسم العميل *</label>
+                        <input type="text" id="newBookingName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>رقم الهاتف *</label>
+                        <input type="tel" id="newBookingPhone" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="newBookingEmail" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>نوع الغرفة *</label>
+                        <select id="newBookingRoomType" class="form-control" required>
+                            <option value="">اختر نوع الغرفة</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>تاريخ الوصول *</label>
+                        <input type="date" id="newBookingCheckin" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>تاريخ المغادرة *</label>
+                        <input type="date" id="newBookingCheckout" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>عدد الضيوف *</label>
+                        <input type="number" id="newBookingGuests" class="form-control" min="1" max="10" value="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>المبلغ ($) *</label>
+                        <input type="number" id="newBookingAmount" class="form-control" min="0" step="10" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>طلبات خاصة</label>
+                    <textarea id="newBookingRequests" class="form-control" placeholder="أي طلبات خاصة من العميل"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>حالة الحجز</label>
+                    <select id="newBookingStatus" class="form-control">
+                        <option value="Pending">قيد الانتظار</option>
+                        <option value="Confirmed">مؤكد</option>
+                        <option value="Cancelled">ملغى</option>
+                    </select>
+                </div>
+                
+                <div style="display:flex; gap:15px; margin-top:25px;">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> حفظ الحجز</button>
+                    <button type="button" onclick="closeModal('addBookingModal')" class="btn btn-warning"><i class="fas fa-times"></i> إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="addRoomModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus"></i> إضافة غرفة جديدة</h2>
+                <button class="close-modal" onclick="closeModal('addRoomModal')">&times;</button>
+            </div>
+            
+            <form id="newRoomForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>اسم الغرفة *</label>
+                        <input type="text" id="newRoomName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>نوع الغرفة *</label>
+                        <select id="newRoomType" class="form-control" required>
+                            <option value="">اختر نوع الغرفة</option>
+                            <option value="Deluxe">ديلوكس</option>
+                            <option value="Suite">جناح فاخر</option>
+                            <option value="Presidential">رئاسي</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>السعر لليلة ($) *</label>
+                        <input type="number" id="newRoomPrice" class="form-control" min="0" step="10" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>السعة (عدد الأشخاص) *</label>
+                        <input type="number" id="newRoomCapacity" class="form-control" min="1" max="10" value="2" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="newRoomDescription" class="form-control" placeholder="أدخل وصف الغرفة"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>المميزات (افصل بفواصل)</label>
+                    <textarea id="newRoomFeatures" class="form-control" placeholder="مثال: واي فاي مجاني, تلفزيون بشاشة مسطحة, ميني بار"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="newRoomAvailable" checked> متاحة للحجز
+                    </label>
+                </div>
+                <!-- ضيف الكود دا قبل نهاية الفورم، مكان المميزات -->
+<!-- قسم رفع الصورة -->
+<!-- قسم رفع الصورة -->
+<div class="form-group">
+    <label>صورة الغرفة *</label>
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <input type="file" id="roomImageFile" accept="image/*" class="form-control" style="flex: 2; padding: 12px;">
+        <button type="button" onclick="uploadRoomImage()" class="btn btn-primary" style="width: auto; padding: 12px 25px;">
+            <i class="fas fa-upload"></i> رفع الصورة
+        </button>
+    </div>
+    <div id="imagePreview" style="margin-top: 15px; display: none;">
+        <img src="" alt="معاينة الصورة" style="max-width: 200px; max-height: 150px; border-radius: 5px;">
+        <input type="hidden" id="roomImagePath">
+        <p style="margin-top: 5px; color: green;"><i class="fas fa-check-circle"></i> تم رفع الصورة</p>
+    </div>
+    <div id="uploadProgress" style="display: none; margin-top: 10px;">
+        <div style="background-color: #f0f0f0; border-radius: 5px; height: 10px;">
+            <div id="progressBar" style="width: 0%; height: 100%; background-color: var(--accent-color); border-radius: 5px;"></div>
+        </div>
+    </div>
+</div>
+                
+                <div style="display:flex; gap:15px; margin-top:25px;">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> حفظ الغرفة</button>
+                    <button type="button" onclick="closeModal('addRoomModal')" class="btn btn-warning"><i class="fas fa-times"></i> إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // API Base URL - استخدم الرابط الصحيح
+        const API_BASE_URL = 'https://localhost:7099/api'; // تغيير إذا كان يعمل على بورت مختلف
+        let authToken = null;
+        let currentUser = null;
+        
+        // تحميل البيانات عند بدء الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            updateCurrentDate();
+            checkLoginStatus();
+        });
+        
+        // دالة مساعدة للاتصال بالـ API
+        async function apiRequest(endpoint, options = {}) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            const headers = {
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+            
+            // إضافة التوكن إذا كان موجوداً
+            if (authToken) {
+                headers['Authorization'] = `Bearer ${authToken}`;
+            }
+            
+            try {
+                console.log(`API Request: ${url}`, options);
+                const response = await fetch(url, {
+                    headers,
+                    ...options
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error(`API Error ${response.status}: ${errorText}`);
+                    
+                    if (response.status === 401) {
+                        // غير مصرح - تسجيل الخروج
+                        logout();
+                        throw new Error('انتهت صلاحية الجلسة، يرجى تسجيل الدخول مرة أخرى');
+                    }
+                    
+                    throw new Error(`خطأ في الخادم: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log(`API Response:`, result);
+                return result;
+            } catch (error) {
+                console.error('API Request Error:', error);
+                throw error;
+            }
+        }
+        
+        // إعداد مستمعات الأحداث
+        function setupEventListeners() {
+            // عرض/إخفاء كلمة المرور
+            document.getElementById('togglePassword').addEventListener('click', function() {
+                const passwordInput = document.getElementById('password');
+                const icon = this.querySelector('i');
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+            
+            // تسجيل الدخول
+            document.getElementById('loginForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+                
+                try {
+                    const result = await apiRequest('/auth/login', {
+                        method: 'POST',
+                        body: JSON.stringify({ username, password })
+                    });
+                    
+                    if (result.success) {
+                        // حفظ التوكن والمستخدم
+                        authToken = result.data.token;
+                        currentUser = result.data.user;
+                        
+                        // حفظ في sessionStorage
+                        sessionStorage.setItem('hotelAuthToken', authToken);
+                        sessionStorage.setItem('hotelUser', JSON.stringify(currentUser));
+                        
+                        // إظهار لوحة التحكم
+                        showDashboard();
+                        loadDashboardData();
+                    } else {
+                        showError(result.message || 'اسم المستخدم أو كلمة المرور غير صحيحة');
+                    }
+                } catch (error) {
+                    console.error('Login Error:', error);
+                    showError('حدث خطأ في الاتصال بالخادم. تأكد من تشغيل الـAPI.');
+                }
+            });
+            
+            // تسجيل الخروج
+            document.getElementById('logoutLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                logout();
+            });
+            
+            // إعداد التنقل بين الأقسام
+            document.querySelectorAll('.nav-links a[data-section]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // إزالة النشاط من جميع الروابط
+                    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                    
+                    // إضافة النشاط للرابط الحالي
+                    this.classList.add('active');
+                    
+                    // إخفاء جميع الأقسام
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // إظهار القسم المحدد
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                    
+                    // تحديث عنوان الصفحة
+                    document.getElementById('pageTitle').textContent = this.querySelector('span').textContent;
+                    
+                    // تحميل بيانات القسم
+                    loadSectionData(sectionId);
+                });
+            });
+            
+            // أحداث النماذج
+            document.getElementById('hotelInfoForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveHotelInfo();
+            });
+            
+            document.getElementById('newBookingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveNewBooking();
+            });
+            
+            document.getElementById('newRoomForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveNewRoom();
+            });
+        }
+        
+        // تحميل بيانات القسم
+        async function loadSectionData(sectionId) {
+            switch(sectionId) {
+                case 'dashboard':
+                    loadDashboardStats();
+                    loadRecentBookings();
+                    break;
+                case 'bookings':
+                    loadAllBookings();
+                    break;
+                case 'rooms':
+                    loadAllRooms();
+                    break;
+                case 'hotelInfo':
+                    loadHotelSettings();
+                    break;
+            }
+        }
+        
+        // تحميل إحصائيات الداشبورد
+        async function loadDashboardStats() {
+            try {
+                const statsResult = await apiRequest('/bookings/stats');
+                if (statsResult.success) {
+                    const stats = statsResult.data;
+                    document.getElementById('totalBookings').textContent = stats.totalBookings;
+                    document.getElementById('totalRevenue').textContent = `$${stats.totalRevenue.toLocaleString()}`;
+                    document.getElementById('monthRevenue').textContent = `$${stats.monthlyRevenue.toLocaleString()}`;
+                    
+                    // حساب الغرف المتاحة ومعدل الإشغال
+                    const roomsResult = await apiRequest('/rooms');
+                    if (roomsResult.success) {
+                        const rooms = roomsResult.data;
+                        const availableRooms = rooms.filter(r => r.isAvailable).length;
+                        const totalRooms = rooms.length;
+                        const occupancyRate = totalRooms > 0 ? Math.round(((totalRooms - availableRooms) / totalRooms) * 100) : 0;
+                        
+                        document.getElementById('availableRooms').textContent = availableRooms;
+                        document.getElementById('occupancyRate').textContent = `${occupancyRate}%`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading dashboard stats:', error);
+            }
+        }
+        
+        // تحميل الحجوزات الأخيرة
+        async function loadRecentBookings() {
+            const container = document.getElementById('recentBookingsContainer');
+            if (!container) return;
+            
+            container.innerHTML = '<div class="spinner"></div>';
+            
+            try {
+                const result = await apiRequest('/bookings/recent/5');
+                if (result.success) {
+                    const bookings = result.data;
+                    displayRecentBookings(bookings);
+                }
+            } catch (error) {
+                console.error('Error loading recent bookings:', error);
+                container.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">تعذر تحميل الحجوزات الأخيرة</p>';
+            }
+        }
+        
+        // عرض الحجوزات الأخيرة
+        function displayRecentBookings(bookings) {
+            const container = document.getElementById('recentBookingsContainer');
+            if (!bookings || bookings.length === 0) {
+                container.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">لا توجد حجوزات حالياً</p>';
+                return;
+            }
+            
+            let html = `
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>رقم الحجز</th>
+                                <th>اسم العميل</th>
+                                <th>نوع الغرفة</th>
+                                <th>تاريخ الوصول</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            bookings.forEach(booking => {
+                const statusClass = getStatusClass(booking.status);
+                const checkInDate = new Date(booking.checkInDate).toLocaleDateString('ar-SA');
+                
+                html += `
+                    <tr>
+                        <td>${booking.id}</td>
+                        <td>${booking.customerName}</td>
+                        <td>${booking.roomType}</td>
+                        <td>${checkInDate}</td>
+                        <td><span class="status ${statusClass}">${getStatusText(booking.status)}</span></td>
+                        <td>
+                            <button class="action-btn edit" onclick="editBooking(${booking.id})" title="تعديل"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete" onclick="deleteBooking(${booking.id})" title="حذف"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `</tbody></table></div>`;
+            container.innerHTML = html;
+        }
+        
+        // تحميل جميع الحجوزات
+        async function loadAllBookings() {
+            const container = document.getElementById('bookingsTableContainer');
+            container.innerHTML = '<div class="spinner"></div>';
+            
+            try {
+                const result = await apiRequest('/bookings');
+                if (result.success) {
+                    displayAllBookings(result.data);
+                }
+            } catch (error) {
+                console.error('Error loading bookings:', error);
+                container.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">تعذر تحميل الحجوزات</p>';
+            }
+        }
+        
+        // عرض جميع الحجوزات
+        function displayAllBookings(bookings) {
+            const container = document.getElementById('bookingsTableContainer');
+            
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>رقم الحجز</th>
+                            <th>اسم العميل</th>
+                            <th>الهاتف</th>
+                            <th>نوع الغرفة</th>
+                            <th>تاريخ الوصول</th>
+                            <th>تاريخ المغادرة</th>
+                            <th>عدد الليالي</th>
+                            <th>المبلغ</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            if (!bookings || bookings.length === 0) {
+                html += `
+                    <tr>
+                        <td colspan="10" style="text-align: center; padding: 20px; color: #666;">لا توجد حجوزات حالياً</td>
+                    </tr>
+                `;
+            } else {
+                bookings.forEach(booking => {
+                    const statusClass = getStatusClass(booking.status);
+                    const checkInDate = new Date(booking.checkInDate).toLocaleDateString('ar-SA');
+                    const checkOutDate = new Date(booking.checkOutDate).toLocaleDateString('ar-SA');
+                    const nights = booking.nights || Math.ceil((new Date(booking.checkOutDate) - new Date(booking.checkInDate)) / (1000 * 60 * 60 * 24));
+                    
+                    html += `
+                        <tr>
+                            <td>${booking.id}</td>
+                            <td>${booking.customerName}</td>
+                            <td>${booking.phone}</td>
+                            <td>${booking.roomType}</td>
+                            <td>${checkInDate}</td>
+                            <td>${checkOutDate}</td>
+                            <td>${nights}</td>
+                            <td>$${booking.totalAmount.toLocaleString()}</td>
+                            <td><span class="status ${statusClass}">${getStatusText(booking.status)}</span></td>
+                            <td>
+                                <button class="action-btn confirm" onclick="updateBookingStatus(${booking.id}, 'Confirmed')" title="تأكيد"><i class="fas fa-check"></i></button>
+                                <button class="action-btn cancel" onclick="updateBookingStatus(${booking.id}, 'Cancelled')" title="إلغاء"><i class="fas fa-times"></i></button>
+                                <button class="action-btn edit" onclick="editBooking(${booking.id})" title="تعديل"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete" onclick="deleteBooking(${booking.id})" title="حذف"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+            
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+        }
+        
+        // تحميل جميع الغرف
+    // تحميل جميع الغرف
+async function loadAllRooms() {
+    const container = document.getElementById('roomsTableContainer');
+    if (!container) return;
+    
+    container.innerHTML = '<div class="spinner"></div>';
+    
+    try {
+        const result = await apiRequest('/rooms');
+        console.log('بيانات الغرف:', result); // شوف البيانات جاية بشكل صح
+        
+        if (result.success) {
+            const rooms = result.data;
+            displayAllRooms(rooms);
+        } else {
+            container.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">فشل تحميل الغرف</p>';
+        }
+    } catch (error) {
+        console.error('Error loading rooms:', error);
+        container.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">تعذر تحميل الغرف</p>';
+    }
+}  
+        // عرض جميع الغرف
+  // عرض جميع الغرف
+function displayAllRooms(rooms) {
+    const container = document.getElementById('roomsTableContainer');
+    if (!container) return;
+    
+    let html = `
+        <table>
+            <thead>
+                <tr>
+                    <th>الصورة</th>
+                    <th>رقم الغرفة</th>
+                    <th>اسم الغرفة</th>
+                    <th>النوع</th>
+                    <th>السعر/ليلة</th>
+                    <th>السعة</th>
+                    <th>الحالة</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    if (!rooms || rooms.length === 0) {
+        html += `
+            <tr>
+                <td colspan="8" style="text-align: center; padding: 20px; color: #666;">لا توجد غرف حالياً</td>
+            </tr>
+        `;
+    } else {
+        rooms.forEach(room => {
+            const statusText = room.isAvailable ? 'متاحة' : 'غير متاحة';
+            const statusClass = room.isAvailable ? 'confirmed' : 'cancelled';
+            
+            // ✅ بناء مسار الصورة الصحيح
+            const baseUrl = API_BASE_URL.replace('/api', '');
+            let imageHtml = '';
+            
+            if (room.imagePath) {
+                let imageUrl = '';
+                if (room.imagePath.startsWith('http')) {
+                    imageUrl = room.imagePath;
+                } else if (room.imagePath.startsWith('/')) {
+                    imageUrl = `${baseUrl}${room.imagePath}`;
+                } else {
+                    imageUrl = `${baseUrl}/images/${room.imagePath}`;
+                }
+                
+                imageHtml = `<img src="${imageUrl}" alt="${room.name || 'غرفة'}" style="width: 60px; height: 40px; object-fit: cover; border-radius: 5px;" onerror="this.onerror=null; this.src='${baseUrl}/images/default-room.jpg';">`;
+            } else {
+                imageHtml = `<i class="fas fa-image" style="font-size: 30px; color: #ccc;"></i>`;
+            }
+            
+            html += `
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">
+                        ${imageHtml}
+                    </td>
+                    <td>${room.id}</td>
+                    <td>${room.name || ''}</td>
+                    <td>${room.type || ''}</td>
+                    <td>$${room.pricePerNight?.toLocaleString() || 0}</td>
+                    <td>${room.capacity || 0} أشخاص</td>
+                    <td><span class="status ${statusClass}">${statusText}</span></td>
+                    <td>
+                        <button class="action-btn edit" onclick="editRoom(${room.id})" title="تعديل"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn ${room.isAvailable ? 'cancel' : 'confirm'}" 
+                                onclick="toggleRoomAvailability(${room.id}, ${!room.isAvailable})" 
+                                title="${room.isAvailable ? 'تعطيل' : 'تفعيل'}">
+                            <i class="fas fa-${room.isAvailable ? 'times' : 'check'}"></i>
+                        </button>
+                        <button class="action-btn delete" onclick="deleteRoom(${room.id})" title="حذف"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+    
+    html += `</tbody></table>`;
+    container.innerHTML = html;
+}
+      async function loadHotelSettings() {
+            try {
+                const result = await apiRequest('/hotel/settings');
+                if (result.success) {
+                    const settings = result.data;
+                    
+                    // تحديث معلومات الفندق
+                    document.getElementById('hotelName').value = settings.hotelName || '';
+                    document.getElementById('hotelAddress').value = settings.address || '';
+                    document.getElementById('hotelPhone').value = settings.phone || '';
+                    document.getElementById('hotelEmail').value = settings.email || '';
+                    document.getElementById('hotelDescription').value = settings.description || '';
+                }
+            } catch (error) {
+                console.error('Error loading hotel settings:', error);
+            }
+        }
+        
+        // حفظ معلومات الفندق
+        async function saveHotelInfo() {
+            try {
+                const hotelData = {
+                    hotelName: document.getElementById('hotelName').value,
+                    address: document.getElementById('hotelAddress').value,
+                    phone: document.getElementById('hotelPhone').value,
+                    email: document.getElementById('hotelEmail').value,
+                    description: document.getElementById('hotelDescription').value
+                };
+                
+                const result = await apiRequest('/hotel/settings', {
+                    method: 'PUT',
+                    body: JSON.stringify(hotelData)
+                });
+                
+                if (result.success) {
+                    alert('✅ تم حفظ معلومات الفندق بنجاح!');
+                } else {
+                    alert('❌ فشل في حفظ المعلومات: ' + (result.message || 'خطأ غير معروف'));
+                }
+            } catch (error) {
+                console.error('Error saving hotel info:', error);
+                alert('❌ حدث خطأ أثناء حفظ المعلومات');
+            }
+        }
+        
+        // حفظ حجز جديد
+        async function saveNewBooking() {
+            try {
+                const bookingData = {
+                    customerName: document.getElementById('newBookingName').value,
+                    phone: document.getElementById('newBookingPhone').value,
+                    email: document.getElementById('newBookingEmail').value,
+                    roomType: document.getElementById('newBookingRoomType').value,
+                    checkInDate: document.getElementById('newBookingCheckin').value,
+                    checkOutDate: document.getElementById('newBookingCheckout').value,
+                    numberOfGuests: parseInt(document.getElementById('newBookingGuests').value),
+                    totalAmount: parseFloat(document.getElementById('newBookingAmount').value),
+                    specialRequests: document.getElementById('newBookingRequests').value,
+                    status: document.getElementById('newBookingStatus').value
+                };
+                
+                const result = await apiRequest('/bookings', {
+                    method: 'POST',
+                    body: JSON.stringify(bookingData)
+                });
+                
+                if (result.success) {
+                    alert('✅ تم إضافة الحجز بنجاح!');
+                    closeModal('addBookingModal');
+                    loadAllBookings();
+                    loadDashboardStats();
+                } else {
+                    alert('❌ فشل في إضافة الحجز: ' + (result.message || 'خطأ غير معروف'));
+                }
+            } catch (error) {
+                console.error('Error saving new booking:', error);
+                alert('❌ حدث خطأ أثناء إضافة الحجز');
+            }
+        }
+        
+        // حفظ غرفة جديدة
+      // تحميل جميع الغرف
+async function loadAllRooms() {
+    const container = document.getElementById('roomsTableContainer');
+    if (!container) return;
+    
+    container.innerHTML = '<div class="spinner"></div>';
+    
+    try {
+        const result = await apiRequest('/rooms');
+        console.log('بيانات الغرف:', result); // شوف البيانات جاية بشكل صح
+        
+        if (result.success) {
+            const rooms = result.data;
+            displayAllRooms(rooms);
+        } else {
+            container.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">فشل تحميل الغرف</p>';
+        }
+    } catch (error) {
+        console.error('Error loading rooms:', error);
+        container.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">تعذر تحميل الغرف</p>';
+    }
+}
+        // تحديث حالة الحجز
+        async function updateBookingStatus(bookingId, status) {
+            if (!confirm('هل أنت متأكد من تغيير حالة الحجز؟')) return;
+            
+            try {
+                const result = await apiRequest(`/bookings/${bookingId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ status })
+                });
+                
+                if (result.success) {
+                    alert('✅ تم تحديث حالة الحجز!');
+                    loadAllBookings();
+                    loadDashboardStats();
+                } else {
+                    alert('❌ فشل في تحديث الحجز: ' + (result.message || 'خطأ غير معروف'));
+                }
+            } catch (error) {
+                console.error('Error updating booking status:', error);
+                alert('❌ حدث خطأ أثناء تحديث الحجز');
+            }
+        }
+        
+        // حذف الحجز
+        async function deleteBooking(bookingId) {
+            if (!confirm('هل أنت متأكد من حذف هذا الحجز؟')) return;
+            
+            try {
+                const result = await apiRequest(`/bookings/${bookingId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (result.success) {
+                    alert('✅ تم حذف الحجز بنجاح!');
+                    loadAllBookings();
+                    loadDashboardStats();
+                } else {
+                    alert('❌ فشل في حذف الحجز: ' + (result.message || 'خطأ غير معروف'));
+                }
+            } catch (error) {
+                console.error('Error deleting booking:', error);
+                alert('❌ حدث خطأ أثناء حذف الحجز');
+            }
+        }
+        
+        // تبديل حالة توفر الغرفة
+        async function toggleRoomAvailability(roomId, isAvailable) {
+            const action = isAvailable ? 'تفعيل' : 'تعطيل';
+            if (!confirm(`هل أنت متأكد من ${action} هذه الغرفة؟`)) return;
+            
+            try {
+                const result = await apiRequest(`/rooms/${roomId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ isAvailable })
+                });
+                
+                if (result.success) {
+                    alert(`✅ تم ${action} الغرفة بنجاح!`);
+                    loadAllRooms();
+                } else {
+                    alert(`❌ فشل في ${action} الغرفة: ` + (result.message || 'خطأ غير معروف'));
+                }
+            } catch (error) {
+                console.error('Error toggling room availability:', error);
+                alert('❌ حدث خطأ أثناء تحديث حالة الغرفة');
+            }
+        }
+        
+        // حذف الغرفة
+        async function deleteRoom(roomId) {
+            if (!confirm('هل أنت متأكد من حذف هذه الغرفة؟')) return;
+            
+            try {
+                const result = await apiRequest(`/rooms/${roomId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (result.success) {
+                    alert('✅ تم حذف الغرفة بنجاح!');
+                    loadAllRooms();
+                    loadRoomTypesForBooking();
+                } else {
+                    alert('❌ فشل في حذف الغرفة: ' + (result.message || 'خطأ غير معروف'));
+                }
+            } catch (error) {
+                console.error('Error deleting room:', error);
+                alert('❌ حدث خطأ أثناء حذف الغرفة');
+            }
+        }
+        
+        // تحرير الحجز
+        async function editBooking(bookingId) {
+            alert('ميزة التعديل قيد التطوير - سيتم إضافتها قريباً');
+        }
+        
+        // تحرير الغرفة
+        async function editRoom(roomId) {
+            alert('ميزة التعديل قيد التطوير - سيتم إضافتها قريباً');
+        }
+        
+        // تحميل أنواع الغرف لنموذج الحجز
+        async function loadRoomTypesForBooking() {
+            try {
+                const result = await apiRequest('/rooms');
+                if (result.success && result.data) {
+                    const roomTypeSelect = document.getElementById('newBookingRoomType');
+                    roomTypeSelect.innerHTML = '<option value="">اختر نوع الغرفة</option>';
+                    
+                    result.data.forEach(room => {
+                        const option = document.createElement('option');
+                        option.value = room.type;
+                        option.textContent = `${room.name} (${room.type})`;
+                        roomTypeSelect.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading room types:', error);
+            }
+        }
+        
+        // التحقق من حالة تسجيل الدخول
+        function checkLoginStatus() {
+            const savedToken = sessionStorage.getItem('hotelAuthToken');
+            const savedUser = sessionStorage.getItem('hotelUser');
+            
+            if (savedToken && savedUser) {
+                authToken = savedToken;
+                currentUser = JSON.parse(savedUser);
+                showDashboard();
+                loadDashboardData();
+            }
+        }
+        
+        // تحميل بيانات الداشبورد
+        async function loadDashboardData() {
+            updateCurrentDate();
+            updateUserInfo();
+            loadDashboardStats();
+            loadRecentBookings();
+            loadRoomTypesForBooking();
+        }
+        
+        // إظهار لوحة التحكم
+        function showDashboard() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboardScreen').style.display = 'block';
+            updateCurrentDate();
+        }
+        
+        // تسجيل الخروج
+        function logout() {
+            sessionStorage.removeItem('hotelAuthToken');
+            sessionStorage.removeItem('hotelUser');
+            authToken = null;
+            currentUser = null;
+            document.getElementById('dashboardScreen').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('loginForm').reset();
+        }
+        
+        // تحديث التاريخ الحالي
+        function updateCurrentDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateElement = document.getElementById('currentDate');
+            const monthElement = document.getElementById('currentMonth');
+            
+            if (dateElement) {
+                dateElement.textContent = now.toLocaleDateString('ar-SA', options);
+            }
+            
+            if (monthElement) {
+                monthElement.textContent = now.toLocaleDateString('ar-SA', { month: 'long' });
+            }
+        }
+        
+        // تحديث معلومات المستخدم
+        function updateUserInfo() {
+            if (currentUser) {
+                document.getElementById('userFullName').textContent = currentUser.fullName;
+                document.getElementById('userAvatar').textContent = currentUser.fullName.charAt(0);
+            }
+        }
+        
+        // عرض رسالة خطأ
+        function showError(message) {
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('errorAlert').style.display = 'flex';
+            
+            setTimeout(() => {
+                document.getElementById('errorAlert').style.display = 'none';
+            }, 5000);
+        }
+        
+        // وظائف مساعدة
+        function getStatusClass(status) {
+            if (!status) return 'pending';
+            switch(status.toLowerCase()) {
+                case 'pending': return 'pending';
+                case 'confirmed': return 'confirmed';
+                case 'cancelled': return 'cancelled';
+                case 'paid': return 'confirmed';
+                default: return 'pending';
+            }
+        }
+        
+        function getStatusText(status) {
+            if (!status) return 'قيد الانتظار';
+            switch(status.toLowerCase()) {
+                case 'pending': return 'قيد الانتظار';
+                case 'confirmed': return 'مؤكد';
+                case 'cancelled': return 'ملغى';
+                case 'paid': return 'مدفوع';
+                default: return status;
+            }
+        }
+        
+        // فتح النافذة المنبثقة
+        function openAddBookingModal() {
+            // تعيين التاريخ الافتراضي
+            const today = new Date().toISOString().split('T')[0];
+            const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+            
+            document.getElementById('newBookingCheckin').value = today;
+            document.getElementById('newBookingCheckout').value = tomorrow;
+            document.getElementById('newBookingGuests').value = 2;
+            document.getElementById('newBookingAmount').value = 120;
+            document.getElementById('addBookingModal').style.display = 'block';
+        }
+        
+      // تعديل دالة فتح النافذة
+function openAddRoomModal() {
+    document.getElementById('addRoomModal').style.display = 'block';
+    document.getElementById('newRoomForm').reset();
+    document.getElementById('roomImageFile').value = '';
+    document.getElementById('roomImagePath').value = '';
+    document.getElementById('imagePreview').style.display = 'none';
+    document.getElementById('uploadProgress').style.display = 'none';
+}
+        
+        // إغلاق النافذة المنبثقة
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.getElementById(modalId).querySelector('form').reset();
+        }
+        
+        // وظائف إضافية
+        function refreshAllData() {
+            loadDashboardStats();
+            loadRecentBookings();
+            loadAllBookings();
+            loadAllRooms();
+            loadHotelSettings();
+            alert('✅ تم تحديث جميع البيانات');
+        }
+        
+        function refreshRooms() {
+            loadAllRooms();
+        }
+        
+        function exportBookingsToExcel() {
+            alert('ميزة التصدير إلى Excel قيد التطوير - سيتم إضافتها قريباً');
+        }
+        
+        function printBookings() {
+            window.print();
+        }
+        // دالة رفع الصورة
+
+
+        // دالة معالجة الصورة محلياً
+// دالة رفع الصورة
+// دالة رفع الصورة
+async function uploadRoomImage() {
+    const fileInput = document.getElementById('roomImageFile');
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        alert('❌ الرجاء اختيار صورة أولاً');
+        return;
+    }
+    
+    // عرض شريط التقدم
+    document.getElementById('uploadProgress').style.display = 'block';
+    document.getElementById('progressBar').style.width = '0%';
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    try {
+        // محاكاة تقدم التحميل
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+            if (progress <= 90) {
+                document.getElementById('progressBar').style.width = progress + '%';
+            }
+        }, 200);
+        
+        const response = await fetch(`${API_BASE_URL}/Upload/room-image`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: formData
+        });
+        
+        clearInterval(interval);
+        
+        const result = await response.json();
+        console.log('نتيجة رفع الصورة:', result);
+        
+        if (result.success) {
+            document.getElementById('progressBar').style.width = '100%';
+            
+            const imagePath = result.data; // مثلاً: /images/47e4bd83-....png
+            document.getElementById('roomImagePath').value = imagePath;
+            
+            // ✅ عرض معاينة الصورة بالمسار الصحيح
+            const baseUrl = API_BASE_URL.replace('/api', '');
+            const preview = document.getElementById('imagePreview');
+            const previewImg = preview.querySelector('img');
+            previewImg.src = `${baseUrl}${imagePath}`;
+            preview.style.display = 'block';
+            
+            setTimeout(() => {
+                document.getElementById('uploadProgress').style.display = 'none';
+                document.getElementById('progressBar').style.width = '0%';
+            }, 1000);
+            
+            alert('✅ تم رفع الصورة بنجاح');
+        } else {
+            throw new Error(result.message || 'فشل رفع الصورة');
+        }
+    } catch (error) {
+        console.error('Upload error:', error);
+        alert('❌ حدث خطأ: ' + error.message);
+        document.getElementById('uploadProgress').style.display = 'none';
+    }
+}
+// تعديل دالة حفظ الغرفة
+async function saveNewRoom() {
+    try {
+        // التحقق من رفع الصورة
+        const imagePath = document.getElementById('roomImagePath').value;
+        if (!imagePath) {
+            alert('❌ يجب رفع صورة للغرفة أولاً');
+            return;
+        }
+        
+        const roomData = {
+            name: document.getElementById('newRoomName').value,
+            type: document.getElementById('newRoomType').value,
+            pricePerNight: parseFloat(document.getElementById('newRoomPrice').value),
+            capacity: parseInt(document.getElementById('newRoomCapacity').value),
+            description: document.getElementById('newRoomDescription').value,
+            features: document.getElementById('newRoomFeatures').value,
+            isAvailable: document.getElementById('newRoomAvailable').checked,
+            imagePath: imagePath
+        };
+        
+        const result = await apiRequest('/rooms', {
+            method: 'POST',
+            body: JSON.stringify(roomData)
+        });
+        
+        if (result.success) {
+            alert('✅ تم إضافة الغرفة بنجاح!');
+            closeModal('addRoomModal');
+            loadAllRooms();
+            loadRoomTypesForBooking();
+        } else {
+            alert('❌ فشل في إضافة الغرفة: ' + (result.message || 'خطأ غير معروف'));
+        }
+    } catch (error) {
+        console.error('Error saving new room:', error);
+        alert('❌ حدث خطأ أثناء إضافة الغرفة');
+    }
+}
+
+// تعديل دالة فتح النافذة
+function openAddRoomModal() {
+    document.getElementById('addRoomModal').style.display = 'block';
+    document.getElementById('newRoomForm').reset();
+    document.getElementById('roomImageFile').value = '';
+    document.getElementById('roomImagePath').value = '';
+    document.getElementById('imagePreview').style.display = 'none';
+    document.getElementById('uploadProgress').style.display = 'none';
+}
+// تعديل الـ HTML بتاع الصورة
+    </script>
+</body>
+</html>

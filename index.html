@@ -1,0 +1,1937 @@
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title id="pageTitle">Luxury Hotel - Luxury Accommodation</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Cairo', sans-serif;
+            }
+            
+            :root {
+                --primary-color: #0a3d62;
+                --secondary-color: #f9ca24;
+                --accent-color: #6ab04c;
+                --light-color: #f5f6fa;
+                --dark-color: #2c3e50;
+                --transition: all 0.3s ease;
+            }
+            
+            body {
+                background-color: #f9f9f9;
+                color: #333;
+                line-height: 1.6;
+            }
+            
+            body[dir="ltr"] {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            
+            .container {
+                width: 90%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            
+            /* Language Selector */
+            .language-selector {
+                position: fixed;
+                top: 90px;
+                left: 20px;
+                z-index: 999;
+                display: flex;
+                gap: 10px;
+                background: white;
+                padding: 10px 15px;
+                border-radius: 25px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            
+            .language-selector button {
+                background: none;
+                border: none;
+                padding: 5px 12px;
+                border-radius: 15px;
+                cursor: pointer;
+                font-weight: 500;
+                transition: var(--transition);
+            }
+            
+            .language-selector button:hover {
+                background-color: #f0f0f0;
+            }
+            
+            .language-selector button.active {
+                background-color: var(--primary-color);
+                color: white;
+            }
+            
+            /* Header & Navigation */
+            header {
+                background-color: rgba(10, 61, 98, 0.95);
+                padding: 15px 0;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            
+            .header-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo {
+                display: flex;
+                align-items: center;
+            }
+            
+            .logo i {
+                color: var(--secondary-color);
+                font-size: 32px;
+                margin-left: 10px;
+            }
+            
+            .logo h1 {
+                color: white;
+                font-size: 24px;
+            }
+            
+            nav ul {
+                display: flex;
+                list-style: none;
+            }
+            
+            nav ul li {
+                margin-right: 25px;
+            }
+            
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 16px;
+                transition: var(--transition);
+                padding: 8px 0;
+                position: relative;
+            }
+            
+            nav ul li a:hover {
+                color: var(--secondary-color);
+            }
+            
+            nav ul li a::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                background-color: var(--secondary-color);
+                bottom: 0;
+                right: 0;
+                transition: var(--transition);
+            }
+            
+            nav ul li a:hover::after {
+                width: 100%;
+            }
+            
+            .book-btn {
+                background-color: var(--secondary-color);
+                color: var(--primary-color);
+                padding: 10px 25px;
+                border-radius: 30px;
+                font-weight: bold;
+                transition: var(--transition);
+                text-decoration: none;
+                display: inline-block;
+                border: none;
+                cursor: pointer;
+            }
+            
+            .book-btn:hover {
+                background-color: #e1b10f;
+                transform: translateY(-3px);
+            }
+            
+            .mobile-menu {
+                display: none;
+                font-size: 24px;
+                color: white;
+                cursor: pointer;
+            }
+            
+            /* Hero Section */
+            .hero {
+                background: linear-gradient(rgba(10, 61, 98, 0.8), rgba(10, 61, 98, 0.9)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80');
+                background-size: cover;
+                background-position: center;
+                color: white;
+                padding: 180px 0 120px;
+                text-align: center;
+                margin-top: 80px;
+            }
+            
+            .hero h2 {
+                font-size: 48px;
+                margin-bottom: 20px;
+            }
+            
+            .hero p {
+                font-size: 20px;
+                max-width: 700px;
+                margin: 0 auto 40px;
+            }
+            
+            .hero-btns {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                padding: 14px 32px;
+                border-radius: 30px;
+                font-weight: bold;
+                text-decoration: none;
+                display: inline-block;
+                transition: var(--transition);
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+            }
+            
+            .btn-primary {
+                background-color: var(--secondary-color);
+                color: var(--primary-color);
+            }
+            
+            .btn-primary:hover {
+                background-color: #e1b10f;
+                transform: translateY(-3px);
+            }
+            
+            .btn-secondary {
+                background-color: transparent;
+                color: white;
+                border: 2px solid white;
+            }
+            
+            .btn-secondary:hover {
+                background-color: white;
+                color: var(--primary-color);
+                transform: translateY(-3px);
+            }
+            
+            /* Section Title */
+            .section-title {
+                text-align: center;
+                margin-bottom: 60px;
+            }
+            
+            .section-title h2 {
+                font-size: 36px;
+                color: var(--primary-color);
+                position: relative;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+            
+            .section-title h2::after {
+                content: '';
+                position: absolute;
+                width: 70px;
+                height: 3px;
+                background-color: var(--secondary-color);
+                bottom: -10px;
+                right: 50%;
+                transform: translateX(50%);
+            }
+            
+            .section-title p {
+                color: #666;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            /* Features Section */
+            .features {
+                padding: 100px 0;
+            }
+            
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+            
+            .feature-card {
+                background-color: white;
+                border-radius: 10px;
+                padding: 40px 30px;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                transition: var(--transition);
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            }
+            
+            .feature-card i {
+                font-size: 48px;
+                color: var(--primary-color);
+                margin-bottom: 25px;
+            }
+            
+            .feature-card h3 {
+                font-size: 22px;
+                margin-bottom: 15px;
+                color: var(--dark-color);
+            }
+            
+            /* Rooms Slider Section */
+            .rooms-slider-section {
+                padding: 80px 0;
+                background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf5 100%);
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+            }
+
+            .rooms-slider-section .container {
+                max-width: 100%;
+                padding: 0 60px;
+            }
+
+            .rooms-slider-container {
+                position: relative;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .rooms-slider {
+                display: flex;
+                gap: 30px;
+                overflow-x: auto;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                padding: 20px 5px 30px;
+                margin: 0 -5px;
+                direction: rtl;
+                cursor: grab;
+                /* إزالة أي تأثيرات حركة من CSS */
+            }
+
+            .rooms-slider:active {
+                cursor: grabbing;
+            }
+
+            .rooms-slider::-webkit-scrollbar {
+                display: none;
+            }
+
+            .room-slider-card {
+                flex: 0 0 auto;
+                width: 380px;
+                background: white;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                position: relative;
+            }
+
+            .room-slider-card:hover {
+                transform: translateY(-15px) scale(1.02);
+                box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
+            }
+
+            .room-slider-img {
+                height: 250px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .room-slider-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.7s ease;
+            }
+
+            .room-slider-card:hover .room-slider-img img {
+                transform: scale(1.15);
+            }
+
+            .room-badge {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--secondary-color), #f39c12);
+                color: var(--primary-color);
+                padding: 8px 20px;
+                border-radius: 30px;
+                font-weight: bold;
+                font-size: 14px;
+                z-index: 2;
+                box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+            }
+
+            .room-slider-info {
+                padding: 25px;
+                background: linear-gradient(to bottom, white, #fafafa);
+            }
+
+            .room-slider-info h3 {
+                font-size: 24px;
+                color: var(--primary-color);
+                margin-bottom: 12px;
+                font-weight: 700;
+                position: relative;
+                padding-bottom: 10px;
+            }
+
+            .room-slider-info h3::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 60px;
+                height: 3px;
+                background: var(--secondary-color);
+                border-radius: 3px;
+            }
+
+            .room-slider-price {
+                background: linear-gradient(135deg, var(--accent-color), #27ae60);
+                color: white;
+                font-size: 28px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                display: inline-block;
+                padding: 8px 25px;
+                border-radius: 40px;
+                box-shadow: 0 5px 15px rgba(106, 176, 76, 0.3);
+            }
+
+            .room-slider-price span {
+                font-size: 16px;
+                font-weight: normal;
+                opacity: 0.9;
+            }
+
+            .room-slider-features {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                margin-bottom: 20px;
+                padding: 15px 0;
+                border-top: 2px dashed #eee;
+                border-bottom: 2px dashed #eee;
+            }
+
+            .room-slider-features span {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: #555;
+                font-size: 15px;
+                background: #f5f5f5;
+                padding: 8px 15px;
+                border-radius: 40px;
+                transition: all 0.3s ease;
+            }
+
+            .room-slider-features span:hover {
+                background: var(--primary-color);
+                color: white;
+                transform: translateY(-3px);
+            }
+
+            .room-slider-features i {
+                color: var(--secondary-color);
+                font-size: 16px;
+            }
+
+            .room-slider-features span:hover i {
+                color: white;
+            }
+
+            .room-slider-description {
+                color: #666;
+                font-size: 14px;
+                line-height: 1.8;
+                margin-bottom: 25px;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                height: 75px;
+            }
+
+            .room-slider-btn {
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(135deg, var(--primary-color), #2980b9);
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-weight: bold;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .room-slider-btn:hover {
+                background: linear-gradient(135deg, var(--secondary-color), #f39c12);
+                color: var(--primary-color);
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+            }
+
+            .room-slider-btn i {
+                transition: transform 0.3s ease;
+            }
+
+            .room-slider-btn:hover i {
+                transform: translateX(-8px);
+            }
+
+            .slider-nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 55px;
+                height: 55px;
+                background: white;
+                border: none;
+                border-radius: 50%;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                color: var(--primary-color);
+                transition: all 0.3s ease;
+                z-index: 20;
+            }
+
+            .slider-nav:hover {
+                background: var(--primary-color);
+                color: white;
+                transform: translateY(-50%) scale(1.15);
+                box-shadow: 0 15px 35px rgba(10, 61, 98, 0.3);
+            }
+
+            .slider-nav.prev {
+                right: 10px;
+            }
+
+            .slider-nav.next {
+                left: 10px;
+            }
+
+            .slider-dots {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 40px;
+            }
+
+            .slider-dot {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: #ccc;
+                cursor: pointer;
+                transition: all 0.4s ease;
+                position: relative;
+            }
+
+            .slider-dot.active {
+                background: var(--primary-color);
+                transform: scale(1.3);
+                box-shadow: 0 0 15px var(--primary-color);
+            }
+
+            .slider-dot:hover {
+                background: var(--secondary-color);
+                transform: scale(1.2);
+            }
+
+            /* Static Rooms Grid Section */
+            .rooms-grid-section {
+                padding: 80px 0;
+                background-color: white;
+            }
+
+            .rooms-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+                margin-top: 40px;
+            }
+
+            .room-grid-card {
+                background: white;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+                transition: all 0.4s ease;
+                border: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .room-grid-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+            }
+
+            .room-grid-img {
+                height: 280px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .room-grid-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.7s ease;
+            }
+
+            .room-grid-card:hover .room-grid-img img {
+                transform: scale(1.1);
+            }
+
+            .room-grid-info {
+                padding: 25px;
+            }
+
+            .room-grid-info h3 {
+                font-size: 24px;
+                color: var(--primary-color);
+                margin-bottom: 15px;
+                font-weight: 700;
+            }
+
+            .room-grid-price {
+                font-size: 28px;
+                color: var(--accent-color);
+                font-weight: bold;
+                margin-bottom: 15px;
+            }
+
+            .room-grid-price span {
+                font-size: 16px;
+                color: #666;
+                font-weight: normal;
+            }
+
+            .room-grid-features {
+                display: flex;
+                gap: 20px;
+                margin-bottom: 15px;
+                padding: 10px 0;
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+            }
+
+            .room-grid-features span {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                color: #555;
+            }
+
+            .room-grid-features i {
+                color: var(--secondary-color);
+            }
+
+            .room-grid-description {
+                color: #666;
+                line-height: 1.8;
+                margin-bottom: 20px;
+            }
+
+            .room-grid-btn {
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(135deg, var(--primary-color), #2980b9);
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-weight: bold;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .room-grid-btn:hover {
+                background: linear-gradient(135deg, var(--secondary-color), #f39c12);
+                color: var(--primary-color);
+            }
+            
+            /* Booking Section */
+            .booking {
+                padding: 100px 0;
+                background-color: white;
+            }
+            
+            .booking-form {
+                background-color: var(--primary-color);
+                padding: 40px;
+                border-radius: 10px;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            .form-row {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .form-group label {
+                display: block;
+                color: white;
+                margin-bottom: 8px;
+                font-weight: 500;
+            }
+            
+            .form-control {
+                width: 100%;
+                padding: 12px 15px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                font-size: 16px;
+            }
+            
+            .submit-btn {
+                background-color: var(--secondary-color);
+                color: var(--primary-color);
+                width: 100%;
+                padding: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                border-radius: 5px;
+                border: none;
+                cursor: pointer;
+                transition: var(--transition);
+                margin-top: 10px;
+            }
+            
+            .submit-btn:hover {
+                background-color: #e1b10f;
+            }
+            
+            /* Footer */
+            footer {
+                background-color: var(--dark-color);
+                color: white;
+                padding: 70px 0 20px;
+            }
+            
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+                margin-bottom: 50px;
+            }
+            
+            .footer-column h3 {
+                font-size: 22px;
+                margin-bottom: 25px;
+                color: var(--secondary-color);
+                position: relative;
+                padding-bottom: 10px;
+            }
+            
+            .footer-column h3::after {
+                content: '';
+                position: absolute;
+                width: 50px;
+                height: 2px;
+                background-color: var(--accent-color);
+                bottom: 0;
+                right: 0;
+            }
+            
+            .footer-column p {
+                margin-bottom: 20px;
+                color: #ccc;
+            }
+            
+            .footer-links {
+                list-style: none;
+            }
+            
+            .footer-links li {
+                margin-bottom: 12px;
+            }
+            
+            .footer-links a {
+                color: #ccc;
+                text-decoration: none;
+                transition: var(--transition);
+            }
+            
+            .footer-links a:hover {
+                color: var(--secondary-color);
+                padding-right: 5px;
+            }
+            
+            .contact-info {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 15px;
+            }
+            
+            .contact-info i {
+                color: var(--secondary-color);
+                margin-left: 10px;
+                margin-top: 5px;
+            }
+            
+            .social-links {
+                display: flex;
+                gap: 15px;
+                margin-top: 20px;
+            }
+            
+            .social-links a {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                color: white;
+                transition: var(--transition);
+            }
+            
+            .social-links a:hover {
+                background-color: var(--secondary-color);
+                color: var(--primary-color);
+                transform: translateY(-5px);
+            }
+            
+            .copyright {
+                text-align: center;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                color: #aaa;
+                font-size: 14px;
+            }
+            
+            /* Responsive */
+            @media (max-width: 1200px) {
+                .room-slider-card {
+                    width: 340px;
+                }
+            }
+            
+            @media (max-width: 992px) {
+                nav ul {
+                    display: none;
+                }
+                
+                .mobile-menu {
+                    display: block;
+                }
+                
+                .hero h2 {
+                    font-size: 36px;
+                }
+                
+                .hero p {
+                    font-size: 18px;
+                }
+                
+                .language-selector {
+                    top: 80px;
+                    left: 10px;
+                    padding: 8px 12px;
+                }
+                
+                .rooms-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .rooms-slider-section .container {
+                    padding: 0 30px;
+                }
+                
+                .room-slider-card {
+                    width: 300px;
+                }
+                
+                .room-slider-img {
+                    height: 200px;
+                }
+                
+                .slider-nav {
+                    width: 45px;
+                    height: 45px;
+                    font-size: 20px;
+                }
+                
+                .section-title h2 {
+                    font-size: 32px;
+                }
+                
+                .hero {
+                    padding: 150px 0 80px;
+                }
+                
+                .hero h2 {
+                    font-size: 32px;
+                }
+                
+                .features, .booking {
+                    padding: 70px 0;
+                }
+                
+                .booking-form {
+                    padding: 30px 20px;
+                }
+                
+                .rooms-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            @media (max-width: 576px) {
+                .rooms-slider-section .container {
+                    padding: 0 15px;
+                }
+                
+                .room-slider-card {
+                    width: 280px;
+                }
+                
+                .slider-nav {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 18px;
+                }
+                
+                .slider-nav.prev {
+                    right: 0;
+                }
+                
+                .slider-nav.next {
+                    left: 0;
+                }
+                
+                .hero-btns {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                
+                .btn {
+                    width: 100%;
+                    max-width: 280px;
+                    margin-bottom: 10px;
+                }
+                
+                .header-content {
+                    flex-wrap: wrap;
+                }
+                
+                .logo h1 {
+                    font-size: 20px;
+                }
+                
+                .language-selector {
+                    flex-direction: column;
+                    gap: 5px;
+                    padding: 10px;
+                }
+            }
+        </style>
+    </head>
+    <body dir="rtl">
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <button data-lang="ar" class="active">العربية</button>
+            <button data-lang="en">English</button>
+            <button data-lang="fr">Français</button>
+        </div>
+        
+        <!-- Header & Navigation -->
+        <header>
+            <div class="container header-content">
+                <div class="logo">
+                    <i class="fas fa-hotel"></i>
+                    <h1 id="siteName">Luxury Hotel</h1>
+                </div>
+                
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#home" data-i18n="home">الرئيسية</a></li>
+                        <li><a href="#features" data-i18n="services">الخدمات</a></li>
+                        <li><a href="#rooms" data-i18n="rooms">الغرف</a></li>
+                        <li><a href="#rooms-grid" data-i18n="allRooms">جميع الغرف</a></li>
+                        <li><a href="#booking" data-i18n="booking">الحجز</a></li>
+                        <li><a href="#contact" data-i18n="contact">اتصل بنا</a></li>
+                        <li><a href="#booking" class="book-btn" data-i18n="bookNow">احجز الآن</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <h2 id="heroTitle">استمتع بإقامة فاخرة معنا</h2>
+                <p id="heroDescription">فندق الرفاهية يوفر لك تجربة إقامة استثنائية تجمع بين الفخامة والراحة والخدمات المتميزة في قلب المدينة</p>
+                <div class="hero-btns">
+                    <a href="#rooms" class="btn btn-primary" data-i18n="viewRooms">استعرض الغرف</a>
+                    <a href="#booking" class="btn btn-secondary" data-i18n="bookNow">احجز الآن</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2 data-i18n="services">خدماتنا المميزة</h2>
+                    <p data-i18n="servicesDesc">نقدم لكم مجموعة من الخدمات والمرافق المصممة لتجعل إقامتكم لا تُنسى</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-wifi"></i>
+                        <h3 data-i18n="wifi">إنترنت عالي السرعة</h3>
+                        <p data-i18n="wifiDesc">اتصال إنترنت مجاني عالي السرعة في جميع أنحاء الفندق</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-utensils"></i>
+                        <h3 data-i18n="restaurant">مطاعم فاخرة</h3>
+                        <p data-i18n="restaurantDesc">مطاعمنا تقدم أشهى المأكولات المحلية والعالمية بإشراف أفضل الطهاة</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-dumbbell"></i>
+                        <h3 data-i18n="gym">مركز لياقة بدنية</h3>
+                        <p data-i18n="gymDesc">مركز لياقة بدنية مجهز بأحدث الأجهزة تحت إشراف مدربين متخصصين</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-swimming-pool"></i>
+                        <h3 data-i18n="pool">مسبح فاخر</h3>
+                        <p data-i18n="poolDesc">مسبح خارجي فاخر مع خدمة المشروبات والوجبات الخفيفة</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-spa"></i>
+                        <h3 data-i18n="spa">منتجع صحي</h3>
+                        <p data-i18n="spaDesc">منتجع صحي متكامل يوفر علاجات تجميلية واسترخائية متنوعة</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-shuttle-van"></i>
+                        <h3 data-i18n="transport">مواصلات مجانية</h3>
+                        <p data-i18n="transportDesc">خدمة مواصلات مجانية من وإلى المطار ومراكز التسوق الرئيسية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rooms Slider Section (لا نهائي - يلف لوحده) -->
+        <section class="rooms-slider-section" id="rooms">
+            <div class="container">
+                <div class="section-title">
+                    <h2 data-i18n="rooms">غرفنا الفاخرة</h2>
+                </div>
+                
+                <div class="rooms-slider-container">
+                    <button class="slider-nav prev" onclick="scrollSlider('prev')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="slider-nav next" onclick="scrollSlider('next')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="rooms-slider" id="roomsSlider">
+                        <!-- Rooms will be loaded dynamically -->
+                    </div>
+                </div>
+                
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </section>
+
+        <!-- Static Rooms Grid Section (جميع الغرف تحت الشريط) -->
+        <section class="rooms-grid-section" id="rooms-grid">
+            <div class="container">
+                <div class="section-title">
+                    <h2 data-i18n="allRooms">جميع الغرف</h2>
+                    <p data-i18n="allRoomsDesc">تصفح جميع الغرف المتاحة في فندقنا</p>
+                </div>
+                
+                <div class="rooms-grid" id="roomsGrid">
+                    <!-- All rooms will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section class="booking" id="booking">
+            <div class="container">
+                <div class="section-title">
+                    <h2 data-i18n="booking">احجز إقامتك</h2>
+                    <p data-i18n="bookingDesc">املأ النموذج التالي لحجز غرفتك في فندق الرفاهية</p>
+                </div>
+                
+                <div class="booking-form">
+                    <form id="reservationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkin" data-i18n="checkin">تاريخ الوصول</label>
+                                <input type="date" id="checkin" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="checkout" data-i18n="checkout">تاريخ المغادرة</label>
+                                <input type="date" id="checkout" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="roomType" data-i18n="roomType">نوع الغرفة</label>
+                                <select id="roomType" class="form-control" required>
+                                    <option value="" data-i18n="selectRoom">اختر نوع الغرفة</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="guests" data-i18n="guests">عدد الضيوف</label>
+                                <select id="guests" class="form-control" required>
+                                    <option value="1" data-i18n="guest1">1 ضيف</option>
+                                    <option value="2" data-i18n="guest2">2 ضيف</option>
+                                    <option value="3" data-i18n="guest3">3 ضيف</option>
+                                    <option value="4" data-i18n="guest4">4 ضيف</option>
+                                    <option value="5+" data-i18n="guest5">5+ ضيف</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name" data-i18n="fullName">الاسم الكامل</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" data-i18n="email">البريد الإلكتروني</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" data-i18n="phone">رقم الهاتف</label>
+                                <input type="tel" id="phone" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="requests" data-i18n="specialRequests">طلبات خاصة (اختياري)</label>
+                                <textarea id="requests" class="form-control" rows="3" data-i18n="requestsPlaceholder" placeholder="أي طلبات خاصة أو ملاحظات"></textarea>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" data-i18n="confirmBooking">تأكيد الحجز</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3 id="footerHotelName">فندق الرفاهية</h3>
+                        <p data-i18n="footerDesc">وجهتك المثالية للراحة والاستجمام في قلب المدينة. نقدم خدمات فندقية فاخرة تلبي جميع توقعات ضيوفنا الكرام.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 data-i18n="quickLinks">روابط سريعة</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home" data-i18n="home">الرئيسية</a></li>
+                            <li><a href="#features" data-i18n="services">الخدمات</a></li>
+                            <li><a href="#rooms" data-i18n="rooms">الغرف</a></li>
+                            <li><a href="#rooms-grid" data-i18n="allRooms">جميع الغرف</a></li>
+                            <li><a href="#booking" data-i18n="booking">الحجز</a></li>
+                            <li><a href="#contact" data-i18n="contact">اتصل بنا</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 data-i18n="contact">اتصل بنا</h3>
+                        <div class="contact-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p id="hotelAddress">جاري التحميل...</p>
+                        </div>
+                        <div class="contact-info">
+                            <i class="fas fa-phone"></i>
+                            <p id="hotelPhone">جاري التحميل...</p>
+                        </div>
+                        <div class="contact-info">
+                            <i class="fas fa-envelope"></i>
+                            <p id="hotelEmail">جاري التحميل...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3 data-i18n="newsletter">النشرة البريدية</h3>
+                        <p data-i18n="newsletterDesc">اشترك في نشرتنا البريدية لتصلك آخر العروض والتخفيضات</p>
+                        <div class="form-group">
+                            <input type="email" id="newsletterEmail" class="form-control" data-i18n="emailPlaceholder" placeholder="بريدك الإلكتروني" style="margin-bottom: 10px;">
+                            <button onclick="subscribeNewsletter()" class="btn btn-primary" style="width: 100%;" data-i18n="subscribe">اشتراك</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p data-i18n="copyright">جميع الحقوق محفوظة &copy; فندق الرفاهية <span id="currentYear"></span></p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            // API Configuration
+            const API_BASE_URL = 'https://localhost:7099/api';
+            
+            // Translations
+            const translations = {
+                ar: {
+                    home: "الرئيسية",
+                    services: "الخدمات",
+                    rooms: "الغرف",
+                    allRooms: "جميع الغرف",
+                    booking: "الحجز",
+                    contact: "اتصل بنا",
+                    bookNow: "احجز الآن",
+                    viewRooms: "استعرض الغرف",
+                    night: "ليلة",
+                    heroTitle: "استمتع بإقامة فاخرة معنا",
+                    heroDescription: "فندق الرفاهية يوفر لك تجربة إقامة استثنائية تجمع بين الفخامة والراحة والخدمات المتميزة في قلب المدينة",
+                    servicesDesc: "نقدم لكم مجموعة من الخدمات والمرافق المصممة لتجعل إقامتكم لا تُنسى",
+                    wifi: "إنترنت عالي السرعة",
+                    wifiDesc: "اتصال إنترنت مجاني عالي السرعة في جميع أنحاء الفندق",
+                    restaurant: "مطاعم فاخرة",
+                    restaurantDesc: "مطاعمنا تقدم أشهى المأكولات المحلية والعالمية بإشراف أفضل الطهاة",
+                    gym: "مركز لياقة بدنية",
+                    gymDesc: "مركز لياقة بدنية مجهز بأحدث الأجهزة تحت إشراف مدربين متخصصين",
+                    pool: "مسبح فاخر",
+                    poolDesc: "مسبح خارجي فاخر مع خدمة المشروبات والوجبات الخفيفة",
+                    spa: "منتجع صحي",
+                    spaDesc: "منتجع صحي متكامل يوفر علاجات تجميلية واسترخائية متنوعة",
+                    transport: "مواصلات مجانية",
+                    transportDesc: "خدمة مواصلات مجانية من وإلى المطار ومراكز التسوق الرئيسية",
+                    roomsDesc: "شريط عرض الغرف - يتحرك بشكل لا نهائي وبسرعة ثابتة",
+                    allRoomsDesc: "تصفح جميع الغرف المتاحة في فندقنا",
+                    persons: "أشخاص",
+                    bookingDesc: "املأ النموذج التالي لحجز غرفتك في فندق الرفاهية",
+                    checkin: "تاريخ الوصول",
+                    checkout: "تاريخ المغادرة",
+                    roomType: "نوع الغرفة",
+                    selectRoom: "اختر نوع الغرفة",
+                    guests: "عدد الضيوف",
+                    guest1: "1 ضيف",
+                    guest2: "2 ضيف",
+                    guest3: "3 ضيف",
+                    guest4: "4 ضيف",
+                    guest5: "5+ ضيف",
+                    fullName: "الاسم الكامل",
+                    email: "البريد الإلكتروني",
+                    phone: "رقم الهاتف",
+                    specialRequests: "طلبات خاصة (اختياري)",
+                    requestsPlaceholder: "أي طلبات خاصة أو ملاحظات",
+                    confirmBooking: "تأكيد الحجز",
+                    footerDesc: "وجهتك المثالية للراحة والاستجمام في قلب المدينة. نقدم خدمات فندقية فاخرة تلبي جميع توقعات ضيوفنا الكرام.",
+                    quickLinks: "روابط سريعة",
+                    newsletter: "النشرة البريدية",
+                    newsletterDesc: "اشترك في نشرتنا البريدية لتصلك آخر العروض والتخفيضات",
+                    emailPlaceholder: "بريدك الإلكتروني",
+                    subscribe: "اشتراك",
+                    copyright: "جميع الحقوق محفوظة &copy; فندق الرفاهية"
+                },
+                en: {
+                    home: "Home",
+                    services: "Services",
+                    rooms: "Rooms",
+                    allRooms: "All Rooms",
+                    booking: "Booking",
+                    contact: "Contact Us",
+                    bookNow: "Book Now",
+                    viewRooms: "View Rooms",
+                    night: "night",
+                    heroTitle: "Experience Luxury Accommodation",
+                    heroDescription: "Luxury Hotel offers you an exceptional stay experience combining luxury, comfort and premium services in the heart of the city",
+                    servicesDesc: "We offer a range of services and facilities designed to make your stay unforgettable",
+                    wifi: "High-Speed Internet",
+                    wifiDesc: "Free high-speed internet connection throughout the hotel",
+                    restaurant: "Luxury Restaurants",
+                    restaurantDesc: "Our restaurants serve the finest local and international cuisine supervised by top chefs",
+                    gym: "Fitness Center",
+                    gymDesc: "Fully equipped fitness center with the latest equipment under expert supervision",
+                    pool: "Luxury Pool",
+                    poolDesc: "Outdoor luxury pool with beverage and snack service",
+                    spa: "Spa Resort",
+                    spaDesc: "Complete spa offering various cosmetic and relaxation treatments",
+                    transport: "Free Transportation",
+                    transportDesc: "Free transportation service to and from the airport and main shopping centers",
+                    roomsDesc: "Rooms slider - Infinite scrolling with constant speed",
+                    allRoomsDesc: "Browse all available rooms in our hotel",
+                    persons: "persons",
+                    bookingDesc: "Fill out the form below to book your room at Luxury Hotel",
+                    checkin: "Check-in Date",
+                    checkout: "Check-out Date",
+                    roomType: "Room Type",
+                    selectRoom: "Select Room Type",
+                    guests: "Number of Guests",
+                    guest1: "1 Guest",
+                    guest2: "2 Guests",
+                    guest3: "3 Guests",
+                    guest4: "4 Guests",
+                    guest5: "5+ Guests",
+                    fullName: "Full Name",
+                    email: "Email Address",
+                    phone: "Phone Number",
+                    specialRequests: "Special Requests (Optional)",
+                    requestsPlaceholder: "Any special requests or notes",
+                    confirmBooking: "Confirm Booking",
+                    footerDesc: "Your ideal destination for relaxation and comfort in the heart of the city. We offer luxury hotel services that meet all expectations of our guests.",
+                    quickLinks: "Quick Links",
+                    newsletter: "Newsletter",
+                    newsletterDesc: "Subscribe to our newsletter to receive the latest offers and discounts",
+                    emailPlaceholder: "Your Email Address",
+                    subscribe: "Subscribe",
+                    copyright: "All rights reserved &copy; Luxury Hotel"
+                },
+                fr: {
+                    home: "Accueil",
+                    services: "Services",
+                    rooms: "Chambres",
+                    allRooms: "Toutes les chambres",
+                    booking: "Réservation",
+                    contact: "Contactez-nous",
+                    bookNow: "Réserver Maintenant",
+                    viewRooms: "Voir les Chambres",
+                    night: "nuit",
+                    heroTitle: "Profitez d'un séjour luxueux avec nous",
+                    heroDescription: "L'Hôtel de Luxe vous offre une expérience de séjour exceptionnelle alliant luxe, confort et services premium au cœur de la ville",
+                    servicesDesc: "Nous proposons une gamme de services et d'équipements conçus pour rendre votre séjour inoubliable",
+                    wifi: "Internet Haut Débit",
+                    wifiDesc: "Connexion Internet gratuite haut débit dans tout l'hôtel",
+                    restaurant: "Restaurants de Luxe",
+                    restaurantDesc: "Nos restaurants servent les meilleures cuisines locale et internationale supervisées par les meilleurs chefs",
+                    gym: "Centre de Fitness",
+                    gymDesc: "Centre de fitness entièrement équipé avec les derniers équipements sous supervision experte",
+                    pool: "Piscine de Luxe",
+                    poolDesc: "Piscine extérieure de luxe avec service de boissons et collations",
+                    spa: "Centre de Spa",
+                    spaDesc: "Spa complet offrant divers traitements cosmétiques et de relaxation",
+                    transport: "Transport Gratuit",
+                    transportDesc: "Service de transport gratuit vers et depuis l'aéroport et les principaux centres commerciaux",
+                    roomsDesc: "Curseur de chambres - Défilement infini à vitesse constante",
+                    allRoomsDesc: "Parcourez toutes les chambres disponibles dans notre hôtel",
+                    persons: "personnes",
+                    bookingDesc: "Remplissez le formulaire ci-dessous pour réserver votre chambre à l'Hôtel de Luxe",
+                    checkin: "Date d'Arrivée",
+                    checkout: "Date de Départ",
+                    roomType: "Type de Chambre",
+                    selectRoom: "Sélectionnez le Type de Chambre",
+                    guests: "Nombre d'Invités",
+                    guest1: "1 Invité",
+                    guest2: "2 Invités",
+                    guest3: "3 Invités",
+                    guest4: "4 Invités",
+                    guest5: "5+ Invités",
+                    fullName: "Nom Complet",
+                    email: "Adresse Email",
+                    phone: "Numéro de Téléphone",
+                    specialRequests: "Demandes Spéciales (Optionnel)",
+                    requestsPlaceholder: "Toute demande spéciale ou remarque",
+                    confirmBooking: "Confirmer la Réservation",
+                    footerDesc: "Votre destination idéale pour la détente et le confort au cœur de la ville. Nous proposons des services hôteliers de luxe qui répondent à toutes les attentes de nos clients.",
+                    quickLinks: "Liens Rapides",
+                    newsletter: "Newsletter",
+                    newsletterDesc: "Abonnez-vous à notre newsletter pour recevoir les dernières offres et réductions",
+                    emailPlaceholder: "Votre Adresse Email",
+                    subscribe: "S'abonner",
+                    copyright: "Tous droits réservés &copy; Hôtel de Luxe"
+                }
+            };
+            
+            let currentLang = 'ar';
+            let hotelData = {
+                name: "Luxury Hotel",
+                address: "Loading...",
+                phone: "Loading...",
+                email: "Loading..."
+            };
+            
+            // سرعة التمرير الثابتة (1.5 بكسل لكل إطار - حوالي 90 بكسل في الثانية)
+            const AUTO_SCROLL_SPEED = 1.5;
+            let animationFrame;
+            let isSliderRunning = true;
+            let roomsData = [];
+            
+            // Initialize
+            document.addEventListener('DOMContentLoaded', function() {
+                loadHotelData();
+                loadRooms();
+                setupEventListeners();
+                updateCurrentYear();
+                
+                const savedLang = localStorage.getItem('hotelLanguage') || 'ar';
+                changeLanguage(savedLang);
+            });
+            
+            // API Helper
+            async function apiRequest(endpoint, options = {}) {
+                try {
+                    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            ...options.headers
+                        },
+                        ...options
+                    });
+                    
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return await response.json();
+                } catch (error) {
+                    console.error('API Error:', error);
+                    throw error;
+                }
+            }
+            
+            // Load Hotel Data
+            async function loadHotelData() {
+                try {
+                    const result = await apiRequest('/hotel/settings');
+                    if (result.success && result.data) {
+                        hotelData = {
+                            name: result.data.hotelName || hotelData.name,
+                            address: result.data.address || hotelData.address,
+                            phone: result.data.phone || hotelData.phone,
+                            email: result.data.email || hotelData.email,
+                            description: result.data.description || hotelData.description
+                        };
+                        updateHotelInfo();
+                    }
+                } catch (error) {
+                    console.error('Failed to load hotel data:', error);
+                    updateHotelInfo();
+                }
+            }
+            
+            // Load Rooms
+            async function loadRooms() {
+                try {
+                    const result = await apiRequest('/rooms');
+                    roomsData = result?.success ? result.data : (Array.isArray(result) ? result : []);
+                    displaySliderRooms(roomsData);
+                    displayGridRooms(roomsData);
+                    populateRoomTypes(roomsData);
+                } catch (error) {
+                    console.error('Failed to load rooms:', error);
+                    document.getElementById('roomsSlider').innerHTML = '<div style="text-align: center; padding: 50px; width: 100%;"><h3 style="color: #666;">حدث خطأ في تحميل الغرف</h3></div>';
+                    document.getElementById('roomsGrid').innerHTML = '<div style="text-align: center; padding: 50px; width: 100%;"><h3 style="color: #666;">حدث خطأ في تحميل الغرف</h3></div>';
+                }
+            }
+            
+            // Display Slider Rooms (Infinite - Auto Scroll)
+            function displaySliderRooms(rooms) {
+                const slider = document.getElementById('roomsSlider');
+                if (!slider) return;
+                
+                slider.innerHTML = '';
+                
+                if (!rooms || rooms.length === 0) {
+                    slider.innerHTML = '<div style="text-align: center; padding: 50px; width: 100%;"><h3 style="color: #666;">لا توجد غرف متاحة حالياً</h3></div>';
+                    return;
+                }
+                
+                // تكرار الغرف 4 مرات لعمل حركة لا نهائية سلسة
+                const allRooms = [...rooms, ...rooms, ...rooms, ...rooms];
+                const baseUrl = 'https://localhost:7099';
+                
+                allRooms.forEach((room, index) => {
+                    const roomCard = document.createElement('div');
+                    roomCard.className = 'room-slider-card';
+                    roomCard.setAttribute('data-index', index % rooms.length);
+                    
+                    let imageUrl = '/images/default-room.jpg';
+                    if (room.imagePath) {
+                        if (room.imagePath.startsWith('http')) {
+                            imageUrl = room.imagePath;
+                        } else if (room.imagePath.startsWith('/')) {
+                            imageUrl = `${baseUrl}${room.imagePath}`;
+                        } else {
+                            imageUrl = `${baseUrl}/images/${room.imagePath}`;
+                        }
+                    }
+                    
+                    let bedText = '🛏️ سرير كينج';
+                    if (room.type?.toLowerCase() === 'presidential') bedText = '🛏️ 3 غرف نوم';
+                    else if (room.type?.toLowerCase() === 'suite') bedText = '🛏️ سريرين كينج';
+                    
+                    let badgeText = room.pricePerNight > 300 ? '🌟 VIP' : (room.pricePerNight > 150 ? '⭐ فاخرة' : 'مميزة');
+                    
+                    roomCard.innerHTML = `
+                        <div class="room-slider-img">
+                            <img src="${imageUrl}" alt="${room.name || 'غرفة'}" onerror="this.src='${baseUrl}/images/default-room.jpg'">
+                            <span class="room-badge">${badgeText}</span>
+                        </div>
+                        <div class="room-slider-info">
+                            <h3>${room.name || 'غرفة'}</h3>
+                            <div class="room-slider-price">$${room.pricePerNight || 0} <span>/ الليلة</span></div>
+                            <div class="room-slider-features">
+                                <span><i class="fas fa-user-friends"></i> ${room.capacity || 2} أشخاص</span>
+                                <span><i class="fas fa-vector-square"></i> ${room.size || 35} م²</span>
+                                <span><i class="fas fa-bed"></i> ${bedText}</span>
+                            </div>
+                            <div class="room-slider-description">${room.description || 'غرفة فاخرة مجهزة بأحدث وسائل الراحة لإقامة مريحة لا تنسى.'}</div>
+                            <button onclick="bookRoom('${room.type || ''}')" class="room-slider-btn">
+                                <span>احجز الآن</span>
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    slider.appendChild(roomCard);
+                });
+                
+                // تعيين موضع البداية في منتصف المجموعة المكررة
+                setTimeout(() => {
+                    const cardWidth = 410; // عرض الكارد + الجاب
+                    slider.scrollLeft = cardWidth * rooms.length;
+                }, 100);
+                
+                updateSliderDots(rooms.length);
+                setTimeout(() => startContinuousScroll(), 500);
+                setupSliderEvents();
+            }
+            
+            // Display Grid Rooms (جميع الغرف)
+            function displayGridRooms(rooms) {
+                const grid = document.getElementById('roomsGrid');
+                if (!grid) return;
+                
+                grid.innerHTML = '';
+                
+                if (!rooms || rooms.length === 0) {
+                    grid.innerHTML = '<div style="text-align: center; padding: 50px; width: 100%;"><h3 style="color: #666;">لا توجد غرف متاحة حالياً</h3></div>';
+                    return;
+                }
+                
+                const baseUrl = 'https://localhost:7099';
+                
+                rooms.forEach(room => {
+                    const roomCard = document.createElement('div');
+                    roomCard.className = 'room-grid-card';
+                    
+                    let imageUrl = '/images/default-room.jpg';
+                    if (room.imagePath) {
+                        if (room.imagePath.startsWith('http')) {
+                            imageUrl = room.imagePath;
+                        } else if (room.imagePath.startsWith('/')) {
+                            imageUrl = `${baseUrl}${room.imagePath}`;
+                        } else {
+                            imageUrl = `${baseUrl}/images/${room.imagePath}`;
+                        }
+                    }
+                    
+                    let bedText = '🛏️ سرير كينج';
+                    if (room.type?.toLowerCase() === 'presidential') bedText = '🛏️ 3 غرف نوم';
+                    else if (room.type?.toLowerCase() === 'suite') bedText = '🛏️ سريرين كينج';
+                    
+                    roomCard.innerHTML = `
+                        <div class="room-grid-img">
+                            <img src="${imageUrl}" alt="${room.name || 'غرفة'}" onerror="this.src='${baseUrl}/images/default-room.jpg'">
+                        </div>
+                        <div class="room-grid-info">
+                            <h3>${room.name || 'غرفة'}</h3>
+                            <div class="room-grid-price">$${room.pricePerNight || 0} <span>/ الليلة</span></div>
+                            <div class="room-grid-features">
+                                <span><i class="fas fa-user-friends"></i> ${room.capacity || 2} أشخاص</span>
+                                <span><i class="fas fa-vector-square"></i> ${room.size || 35} م²</span>
+                                <span><i class="fas fa-bed"></i> ${bedText}</span>
+                            </div>
+                            <div class="room-grid-description">${room.description || 'غرفة فاخرة مجهزة بأحدث وسائل الراحة لإقامة مريحة لا تنسى.'}</div>
+                            <button onclick="bookRoom('${room.type || ''}')" class="room-grid-btn">
+                                <span>احجز الآن</span>
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    grid.appendChild(roomCard);
+                });
+            }
+            
+            // Populate Room Types in Booking Form
+            function populateRoomTypes(rooms) {
+                const select = document.getElementById('roomType');
+                if (!select) return;
+                
+                const firstOption = select.querySelector('option[value=""]');
+                select.innerHTML = '';
+                if (firstOption) select.appendChild(firstOption);
+                
+                rooms.forEach(room => {
+                    const option = document.createElement('option');
+                    option.value = room.type || room.id || '';
+                    option.textContent = room.name || 'غرفة';
+                    select.appendChild(option);
+                });
+            }
+            
+            // Slider Functions
+            function updateSliderDots(totalRooms) {
+                const dotsContainer = document.getElementById('sliderDots');
+                if (!dotsContainer || !totalRooms) return;
+                
+                let dotsHtml = '';
+                for (let i = 0; i < totalRooms; i++) {
+                    dotsHtml += `<span class="slider-dot" onclick="goToSlide(${i})"></span>`;
+                }
+                dotsContainer.innerHTML = dotsHtml;
+            }
+            
+            function scrollSlider(direction) {
+                const slider = document.getElementById('roomsSlider');
+                pauseContinuousScroll();
+                const scrollAmount = direction === 'next' ? 400 : -400;
+                slider.scrollLeft += scrollAmount;
+                
+                setTimeout(resumeContinuousScroll, 1000);
+            }
+            
+            function goToSlide(index) {
+                const slider = document.getElementById('roomsSlider');
+                pauseContinuousScroll();
+                const cardWidth = 410; // عرض الكارد + الجاب
+                slider.scrollLeft = (index + roomsData.length) * cardWidth;
+                setTimeout(resumeContinuousScroll, 1000);
+            }
+            
+            function continuousScroll() {
+                const slider = document.getElementById('roomsSlider');
+                if (!slider) return;
+                
+                if (isSliderRunning) {
+                    slider.scrollLeft += AUTO_SCROLL_SPEED;
+                    
+                    // حساب حدود النطاق الآمن للتمرير (وسط المجموعة المكررة)
+                    const cardWidth = 410;
+                    const minScroll = cardWidth * roomsData.length;
+                    const maxScroll = cardWidth * roomsData.length * 2;
+                    
+                    // إذا وصل للنهاية، ارجع للبداية بشكل فوري (يخلق تأثير لا نهائي)
+                    if (slider.scrollLeft >= maxScroll) {
+                        slider.scrollLeft = minScroll;
+                    }
+                    
+                    // تحديث النقاط النشطة
+                    updateActiveDot(slider);
+                }
+                
+                animationFrame = requestAnimationFrame(continuousScroll);
+            }
+            
+            function updateActiveDot(slider) {
+                if (!roomsData.length) return;
+                
+                const dots = document.querySelectorAll('.slider-dot');
+                if (!dots.length) return;
+                
+                const cardWidth = 410;
+                const currentScroll = slider.scrollLeft;
+                const totalScroll = cardWidth * roomsData.length;
+                
+                // حساب الفهرس الحالي مع تجاهل التكرارات
+                let currentIndex = Math.floor((currentScroll % totalScroll) / cardWidth);
+                if (currentIndex >= roomsData.length) currentIndex = 0;
+                
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            function startContinuousScroll() {
+                if (animationFrame) cancelAnimationFrame(animationFrame);
+                isSliderRunning = true;
+                continuousScroll();
+            }
+            
+            function pauseContinuousScroll() {
+                isSliderRunning = false;
+            }
+            
+            function resumeContinuousScroll() {
+                isSliderRunning = true;
+            }
+            
+            function setupSliderEvents() {
+                const slider = document.getElementById('roomsSlider');
+                if (!slider) return;
+                
+                // إيقاف الحركة عند التفاعل مع السلايدر
+                slider.addEventListener('mouseenter', pauseContinuousScroll);
+                slider.addEventListener('mouseleave', resumeContinuousScroll);
+                slider.addEventListener('touchstart', pauseContinuousScroll);
+                slider.addEventListener('touchend', resumeContinuousScroll);
+                slider.addEventListener('mousedown', pauseContinuousScroll);
+                slider.addEventListener('mouseup', resumeContinuousScroll);
+                slider.addEventListener('scroll', () => updateActiveDot(slider));
+            }
+            
+            // Event Listeners
+            function setupEventListeners() {
+                // Language Selector
+                document.querySelectorAll('.language-selector button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        changeLanguage(this.getAttribute('data-lang'));
+                    });
+                });
+                
+                // Mobile Menu
+                document.querySelector('.mobile-menu').addEventListener('click', function() {
+                    const nav = document.querySelector('nav ul');
+                    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+                });
+                
+                // Form Submission
+                document.getElementById('reservationForm').addEventListener('submit', handleBookingSubmit);
+                
+                // Date Validation
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('checkin').setAttribute('min', today);
+                document.getElementById('checkin').addEventListener('change', function() {
+                    document.getElementById('checkout').setAttribute('min', this.value);
+                });
+                
+                // Smooth Scrolling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                            if (window.innerWidth <= 992) {
+                                document.querySelector('nav ul').style.display = 'none';
+                            }
+                        }
+                    });
+                });
+                
+                // Responsive Menu
+                window.addEventListener('resize', function() {
+                    document.querySelector('nav ul').style.display = window.innerWidth > 992 ? 'flex' : 'none';
+                });
+            }
+            
+            // Handle Booking Form
+            async function handleBookingSubmit(e) {
+                e.preventDefault();
+                
+                try {
+                    const bookingData = {
+                        customerName: document.getElementById('name').value,
+                        phone: document.getElementById('phone').value,
+                        email: document.getElementById('email').value,
+                        roomType: document.getElementById('roomType').value,
+                        checkInDate: document.getElementById('checkin').value,
+                        checkOutDate: document.getElementById('checkout').value,
+                        numberOfGuests: parseInt(document.getElementById('guests').value),
+                        specialRequests: document.getElementById('requests').value || null
+                    };
+                    
+                    const result = await apiRequest('/bookings', {
+                        method: 'POST',
+                        body: JSON.stringify(bookingData)
+                    });
+                    
+                    if (result.success) {
+                        const messages = {
+                            ar: `شكراً ${bookingData.customerName}! تم استلام طلب حجزك بنجاح. سنتواصل معك خلال 24 ساعة لتأكيد الحجز.`,
+                            en: `Thank you ${bookingData.customerName}! Your booking request has been received. We will contact you within 24 hours.`,
+                            fr: `Merci ${bookingData.customerName}! Votre demande de réservation a été reçue. Nous vous contacterons dans les 24 heures.`
+                        };
+                        alert(messages[currentLang]);
+                        document.getElementById('reservationForm').reset();
+                    }
+                } catch (error) {
+                    console.error('Booking Error:', error);
+                    const errors = {
+                        ar: 'حدث خطأ أثناء إرسال الحجز. يرجى المحاولة مرة أخرى.',
+                        en: 'An error occurred while submitting the booking. Please try again.',
+                        fr: 'Une erreur est survenue lors de l\'envoi de la réservation. Veuillez réessayer.'
+                    };
+                    alert(errors[currentLang]);
+                }
+            }
+            
+            // Language Functions
+            function changeLanguage(lang) {
+                currentLang = lang;
+                
+                document.querySelectorAll('.language-selector button').forEach(button => {
+                    button.classList.toggle('active', button.getAttribute('data-lang') === lang);
+                });
+                
+                document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+                document.body.style.fontFamily = (lang === 'ar') ? "'Cairo', sans-serif" : "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+                
+                applyTranslations(lang);
+                localStorage.setItem('hotelLanguage', lang);
+                updatePageTitle();
+            }
+            
+            function applyTranslations(lang) {
+                const translation = translations[lang];
+                if (!translation) return;
+                
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (translation[key]) {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = translation[key];
+                        } else {
+                            element.textContent = translation[key];
+                        }
+                    }
+                });
+                
+                updateHotelInfo();
+            }
+            
+            function updatePageTitle() {
+                const titles = {
+                    ar: `${hotelData.name} - إقامة فاخرة`,
+                    en: `${hotelData.name} - Luxury Accommodation`,
+                    fr: `${hotelData.name} - Hébergement de Luxe`
+                };
+                document.getElementById('pageTitle').textContent = titles[currentLang];
+            }
+            
+            // Update Hotel Info
+            function updateHotelInfo() {
+                document.getElementById('siteName').textContent = hotelData.name;
+                document.getElementById('footerHotelName').textContent = hotelData.name;
+                document.getElementById('hotelAddress').textContent = hotelData.address;
+                document.getElementById('hotelPhone').textContent = hotelData.phone;
+                document.getElementById('hotelEmail').textContent = hotelData.email;
+                
+                if (hotelData.description) {
+                    document.getElementById('heroDescription').textContent = hotelData.description;
+                }
+            }
+            
+            // Other Functions
+            function bookRoom(roomType) {
+                const roomSelect = document.getElementById('roomType');
+                if (roomSelect) {
+                    for (let i = 0; i < roomSelect.options.length; i++) {
+                        if (roomSelect.options[i].value === roomType) {
+                            roomSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+                
+                const bookingSection = document.getElementById('booking');
+                if (bookingSection) {
+                    window.scrollTo({
+                        top: bookingSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            function subscribeNewsletter() {
+                const email = document.getElementById('newsletterEmail').value;
+                if (!email) {
+                    const errors = {
+                        ar: 'يرجى إدخال بريدك الإلكتروني',
+                        en: 'Please enter your email address',
+                        fr: 'Veuillez saisir votre adresse e-mail'
+                    };
+                    alert(errors[currentLang]);
+                    return;
+                }
+                
+                const messages = {
+                    ar: `شكراً لاشتراكك في نشرتنا البريدية! سنرسل لك آخر العروض على ${email}`,
+                    en: `Thank you for subscribing! We'll send you the latest offers to ${email}`,
+                    fr: `Merci de vous être abonné! Nous vous enverrons les dernières offres à ${email}`
+                };
+                
+                alert(messages[currentLang]);
+                document.getElementById('newsletterEmail').value = '';
+            }
+            
+            function updateCurrentYear() {
+                document.getElementById('currentYear').textContent = new Date().getFullYear();
+            }
+            
+            // Auto-refresh data every 30 seconds
+            setInterval(() => {
+                loadHotelData();
+                loadRooms();
+            }, 30000);
+        </script>
+    </body>
+    </html>
