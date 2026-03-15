@@ -233,8 +233,33 @@ Authorization: Bearer <your_token>
 
 ## 📸 Screenshots
 
-> Add screenshots of the admin dashboard and booking flow here!
-> `![Dashboard](screenshots/dashboard.png)`
+### 🌐 Public Website
+
+| Home Page | Services |
+|-----------|----------|
+| ![Home](images/1.png) | ![Services](images/2.png) |
+
+| Rooms Carousel | All Rooms |
+|----------------|-----------|
+| ![Rooms Carousel](images/3.png) | ![All Rooms](images/4.png) |
+
+| Booking Form |
+|-------------|
+| ![Booking Form](images/5.png) |
+
+### 🔐 Admin Panel
+
+| Admin Login | Dashboard Overview |
+|------------|-------------------|
+| ![Login](images/6.png) | ![Dashboard](images/7.png) |
+
+| Booking Management | Room Management |
+|-------------------|----------------|
+| ![Bookings](images/8.png) | ![Rooms](images/9.png) |
+
+| Hotel Settings |
+|---------------|
+| ![Settings](images/10.png) |
 
 ---
 
@@ -247,19 +272,6 @@ Authorization: Bearer <your_token>
 5. Open a pull request
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## 📄 License
 
